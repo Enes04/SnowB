@@ -252,6 +252,7 @@ namespace PathCreation {
         /// Also calculate how far t is between those two vertices as a percentage between 0 and 1.
         TimeOnPathData CalculatePercentOnPathData (float t, EndOfPathInstruction endOfPathInstruction) {
             // Constrain t based on the end of path instruction
+           
             switch (endOfPathInstruction) {
                 case EndOfPathInstruction.Loop:
                     // If t is negative, make it the equivalent value between 0 and 1

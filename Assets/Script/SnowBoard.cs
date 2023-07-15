@@ -8,6 +8,8 @@ public class SnowBoard : MonoBehaviour
     private float distanceTravelled;
     private PathCreator _creator;
     public EndOfPathInstruction endOfPathInstruction;
+    public int i;
+    public float id;
     private void Start()
     {
         _creator = FindObjectOfType<PathCreator>();
@@ -25,7 +27,6 @@ public class SnowBoard : MonoBehaviour
             distanceTravelled += speed*Time.deltaTime;
             transform.position =Vector3.Lerp(transform.position,_creator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction),0.25f);
             transform.rotation =Quaternion.Lerp(transform.rotation,_creator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction),0.25f);
-        
         }
     }
 }

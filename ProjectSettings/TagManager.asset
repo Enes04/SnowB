@@ -8,6 +8,7 @@ TagManager:
   - flag
   - ramp
   - balance
+  - FinishJump
   layers:
   - Default
   - TransparentFX

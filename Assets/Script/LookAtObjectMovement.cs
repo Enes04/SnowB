@@ -6,14 +6,18 @@ public class LookAtObjectMovement : MonoBehaviour
 {
     [Header("Player Swipe Settings For PC")]
     public float roadSize = 10;
+
     public float swipeSpeed = 5;
     public float sensitive = 3;
     private float _initalX = 0;
     private float startX;
     public GameObject playersObj;
+    public bool move;
+
     private void Update()
     {
-        PlayerSwipe();
+        if (move)
+            PlayerSwipe();
     }
 
 
@@ -31,15 +35,19 @@ public class LookAtObjectMovement : MonoBehaviour
             screenPos = Mathf.Clamp(screenPos, 0, 1);
 
             float newX = startX + (roadSize / 2) * (screenPos - _initalX) * swipeSpeed;
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(newX, transform.localPosition.y, transform.localPosition.z), sensitive * Time.deltaTime);
+            transform.localPosition = Vector3.Lerp(transform.localPosition,
+                new Vector3(newX, transform.localPosition.y, transform.localPosition.z), sensitive * Time.deltaTime);
 
             var localPos = transform.localPosition;
             localPos.x = Mathf.Clamp(localPos.x, -roadSize / 2, roadSize / 2);
             transform.localPosition = localPos;
         }
+
         if (!Input.GetMouseButton(0))
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(playersObj.transform.localPosition.x, transform.localPosition.y, transform.localPosition.z), 0.025f);
+            transform.localPosition = Vector3.Lerp(transform.localPosition,
+                new Vector3(playersObj.transform.localPosition.x, transform.localPosition.y, transform.localPosition.z),
+                0.025f);
         }
     }
 }

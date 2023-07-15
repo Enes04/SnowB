@@ -10,10 +10,15 @@ public class PlayerMovement : MonoBehaviour
         public float sensitive;
         public float roadSize = 10;
         float currentPos;
+        public bool move;
     
         private void Update()
         {
-            MovePlayerWithExactLocation();
+            if (move)
+            {
+                MovePlayerWithExactLocation();
+            }
+          
         }
     
         void MovePlayerWithExactLocation()
