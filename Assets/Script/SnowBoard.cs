@@ -1,24 +1,31 @@
 using UnityEngine;
+using PathCreation;
+using PathCreation.Examples;
 
 public class SnowBoard : MonoBehaviour
 {
     public float speed;
-    private Rigidbody _rigidbody;
-    
-
+    private float distanceTravelled;
+    private PathCreator _creator;
+    public EndOfPathInstruction endOfPathInstruction;
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _creator = FindObjectOfType<PathCreator>();
     }
 
     private void LateUpdate()
     {
         Snowwing();
     }
-
+    
     public void Snowwing()
     {
-        _rigidbody.AddForce(Vector3.forward*speed);
-        _rigidbody.maxLinearVelocity = speed/2;
+        if (_creator != null)
+        {
+            distanceTravelled += speed*Time.deltaTime;
+            transform.position =Vector3.Lerp(transform.position,_creator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction),0.25f);
+            transform.rotation =Quaternion.Lerp(transform.rotation,_creator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction),0.25f);
+        
+        }
     }
 }
